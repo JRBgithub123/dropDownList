@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script>
+        //面向对象的思想
+        //二级菜单的显示  隐藏
+        //获取对象  便历对象  显示模块  隐藏模块
+        //1构造函数
+
+        window.onload=function() {
+
+            function  List(id){
+                this.allDiv=document.getElementById(id);
+                //获取菜单里边所有的li
+                this.lis=this.allDiv.children[0].children;
+
+            }
+            //控制二级菜单的显示与隐藏
+            //2初始化函数
+            List.prototype.init=function(){
+                  //for  in 一般循环对象
+                for(var i=0;i<this.lis.length;i++){
+                    //一级菜单的li
+                    this.lis[i].onmouseover=function(){
+                        //下面的this指的是最外层的li
+                        //that指的是List 对象
+                        tmp.showSecondMenu(this.children[0]);
+                    }
+
+                    this.lis[i].onmouseout=function(){
+                        tmp.hiddenSecondMenu(this.children[0])
+                    }
+                }
+            }
+
+            List.prototype.showSecondMenu=function(obj){
+                obj.style.display="block";
+            }
+            List.prototype.hiddenSecondMenu=function(obj){
+                obj.style.display="";
+            }
+            var tmp = new List("all");
+            tmp.init();
+
+        }
+
+
+
+    </script>
+    <style>
+        *{margin:0;padding:0;list-style:none;}
+        .all{width:330px;height:30px;background: yellow;line-height:30px;text-align:center;margin:100px auto;}
+        .all ul  li{width:100px;height:30px;float:left;background: #ccc;cursor:pointer;}
+        .all ul ul{width:100px;height:60px;display:none;top:30px;left:0;}
+    </style>
+</head>
+<body>
+<div class="all" id="all">
+    <ul>
+        <li>公司简介
+            <ul>
+                <li>二级菜单</li>
+                <li>二级菜单</li>
+                <li>二级菜单</li>
+            </ul>
+        </li>
+        <li>公司业务
+            <ul>
+                <li>二级菜单</li>
+                <li>二级菜单</li>
+                <li>二级菜单</li>
+            </ul>
+        </li>
+        <li>公司部门
+            <ul>
+                <li>二级菜单</li>
+                <li>二级菜单</li>
+                <li>二级菜单</li>
+            </ul>
+        </li>
+    </ul>
+</div>
+</body>
+</html>
